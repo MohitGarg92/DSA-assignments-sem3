@@ -1,16 +1,82 @@
-
-
+import java.util.*;
 public class question1 {
-    public static void main(String[] args) {
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
+    static int length;
+    static int[] array;
+    static Scanner sc = new Scanner(System.in);
+    static void CreateArray()
+    {
+        // creating the array 
+        System.out.println("please enter the length of array");
+        length = sc.nextInt();
+        array = new int[length+1];
+        System.out.println("please enter the array elements");
+        for(int i=0;i<length;i++)
+        {
+            array[i]=sc.nextInt();
+        }
     }
-    
+    static void InsertElement()
+    {
+        // inserting the array elements 
+        System.out.println("please enter the position of number where it is to be inserted ");
+        int pos = sc.nextInt();
+        System.out.println("enter the number to be inserted");
+        int num = sc.nextInt();
+        for(int i=length;i>=pos;i--)
+        {
+            array[i]=array[i-1];
+        }
+        array[pos-1]=num;
+        length++;
+        PrintElements();   
+    }
+    static void deleteElement()
+    {
+
+        // deleting the elements
+        System.out.println("enter the position of the element that is to be deleted");
+        int del= sc.nextInt();
+        if(del<length)
+        {
+        for(int i=del-1;i<length-1;i++)
+        {
+            array[i]=array[i+1];
+        }
+        length--;
+    }
+        PrintElements();
+    }
+    static int LinearSearch()
+    {
+        System.out.println("enter the number to be searched");
+        int target=sc.nextInt();
+        for(int i=0;i<length;i++)
+        {
+            if(array[i]==target)
+            return i+1;
+        }
+        return -1;
+    }
+    static void PrintElements()
+    {
+        for(int i=0;i<length;i++)
+        {
+            System.out.print(array[i]+" ");
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        CreateArray();
+        PrintElements();
+        InsertElement();
+        deleteElement();
+        int index=LinearSearch();
+        if(index>0)
+        System.out.println("array found at index "+index);
+        else
+        System.out.println("element not found");
+        // exit 
+        System.out.println("thank you");
+        sc.close();
+    }
 }
