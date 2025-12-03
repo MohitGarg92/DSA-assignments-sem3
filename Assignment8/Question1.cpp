@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+struct Node{
+    int val;
+    Node* left;
+    Node* right;
+    Node(int v){ val=v; left=right=NULL; }
+};
+
+Node* insertNode(Node* root, int x){
+    if(!root) return new Node(x);
+    if(x < root->val) root->left = insertNode(root->left,x);
+    else root->right = insertNode(root->right,x);
+    return root;
+}
+
+void preorder(Node* root){
+    if(!root) return;
+    cout<<root->val<<" ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void inorder(Node* root){
+    if(!root) return;
+    inorder(root->left);
+    cout<<root->val<<" ";
+    inorder(root->right);
+}
+
+void postorder(Node* root){
+    if(!root) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->val<<" ";
+}
+
+int main(){
+    Node* root=NULL;
+    int n,x;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        root = insertNode(root,x);
+    }
+
+    preorder(root);
+    cout<<"\n";
+    inorder(root);
+    cout<<"\n";
+    postorder(root);
+}
